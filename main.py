@@ -166,11 +166,11 @@ def add_resume_path_to_candidat(candidat):
 
 # загрузка резюме
 def add_resume_to_db(candidate):
-    file = None
-    photo = None
+    file_id = None
+    photo_id = None
     if candidat['Путь_к_резюме'] is None:
-        candidate['ИД_Файла'] = file
-        candidate['ИД_Фото'] = photo
+        candidate['ИД_Файла'] = file_id
+        candidate['ИД_Фото'] = photo_id
         return
     headers_local = headers.copy()
     headers_local['X-File-Parse'] = 'true'
@@ -184,10 +184,10 @@ def add_resume_to_db(candidate):
         )
         if resp.status_code == 200:
             resp == resp.json()
-            file = resp['id']
-            photo = resp['photo']['id'] if resp['photo'] else None
-        candidate['ИД_Файла'] = file
-        candidate['ИД_Фото'] = photo
+            file_id = resp['id']
+            photo_id = resp['photo']['id'] if resp['photo'] else None
+        candidate['ИД_Файла'] = file_id
+        candidate['ИД_Фото'] = photo_id
     except:
         print('Ошибка при загрузке фала резюме')
         sys.exit(1)
