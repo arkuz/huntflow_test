@@ -26,10 +26,10 @@ def load_data_from_file(path):
     wb = openpyxl.load_workbook(path)
     sheet = wb['Лист1']
     # проверить существование файла
+    rows = sheet.max_row
     if os.path.isfile(resume_load_file):
         with open(resume_load_file, 'r', encoding='utf8') as f:
             rows = int(f.readline())
-    rows = sheet.max_row
     cols = sheet.max_column
     candidates_list = []
     for row in range(2, rows + 1):
